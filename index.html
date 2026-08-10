@@ -230,6 +230,10 @@
   .hero h1 {
     font-size: clamp(44px, 7vw, 84px); line-height: 1.06; letter-spacing: 0.005em; max-width: 880px;
   }
+  .hero-subtitle {
+    font-family: var(--font-body); font-style: italic; font-weight: 700; font-size: clamp(19px, 2.2vw, 24px);
+    color: var(--gold-400); max-width: 620px; margin: 22px 0 0; line-height: 1.5;
+  }
   .hero .lead { color: var(--white-muted); max-width: 580px; margin: 28px 0 12px; }
   .hero .lead.strong { color: var(--white); font-weight: 700; }
   .hero-ctas { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; margin: 36px 0 44px; }
@@ -287,6 +291,19 @@
   }
   .numbered-card h3 { font-size: 21px; margin-bottom: 10px; letter-spacing: 0.01em; }
   .numbered-card p { color: var(--ink-muted); margin: 0; font-size: 16px; }
+
+  /* ============ Quadrivium (companheiro do Trivium) ============ */
+  .quad-intro { max-width: 720px; margin: 0 auto; text-align: center; }
+  .quad-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 36px;
+    max-width: 980px; margin: 40px auto 0;
+  }
+  .quad-item { text-align: center; }
+  .quad-item .num {
+    font-family: var(--font-display); font-size: 13px; color: var(--gold); letter-spacing: 0.16em; display: block; margin-bottom: 12px;
+  }
+  .quad-item h4 { font-family: var(--font-display); font-size: 19px; letter-spacing: 0.02em; margin-bottom: 8px; color: var(--navy); }
+  .quad-item p { font-size: 14.5px; color: var(--ink-muted); margin: 0; line-height: 1.6; }
 
   /* ============ Virtue list ============ */
   .virtue-list { display: flex; flex-direction: column; }
@@ -551,8 +568,9 @@
       <span class="brand" style="color:var(--white-muted);font-size:12px;letter-spacing:0.2em">Goiânia · Admissões 2027</span>
     </div>
     <h1 class="reveal">Uma educação para <span class="gilded">toda a vida</span>.</h1>
+    <p class="hero-subtitle reveal">Aqui, seu filho se torna quem Deus o chamou para ser.</p>
     <p class="lead strong reveal">Educação Clássica como metodologia. Cosmovisão cristã como fundamento.</p>
-    <p class="lead reveal">Uma formação que une excelência acadêmica, desenvolvimento intelectual, cultura, virtudes e propósito. Aqui, seu filho se torna quem Deus o chamou para ser.</p>
+    <p class="lead reveal">Uma formação que une excelência acadêmica, desenvolvimento intelectual, cultura, virtudes e propósito.</p>
     <div class="hero-ctas reveal">
       <a class="btn btn-primary" href="#educar">Quero conhecer a Legatum</a>
       <a class="btn btn-outline" href="#admissoes">Garantir minha vaga na lista 2027</a>
@@ -671,6 +689,36 @@
         <div class="seal">III</div>
         <h3>Retórica</h3>
         <p><strong style="color:var(--navy)">Expressar e comunicar.</strong> O aluno organiza suas ideias e as apresenta com clareza, precisão e convicção. Não basta saber: é preciso aprender a dizer bem aquilo que se sabe.</p>
+      </div>
+    </div>
+
+    <hr class="hairline reveal" style="max-width:980px;margin-left:auto;margin-right:auto">
+
+    <div class="quad-intro reveal">
+      <div class="eyebrow center" style="justify-content:center">O Quadrivium</div>
+      <p style="color:var(--ink-muted)">O Trivium prepara a mente para conhecer, pensar e comunicar. O Quadrivium — as outras quatro artes liberais clássicas — direciona esse mesmo rigor para o mundo material: os números, as formas, os sons e os astros. Juntas, elas formam as sete artes liberais que sustentam a Educação Clássica.</p>
+    </div>
+
+    <div class="quad-grid reveal">
+      <div class="quad-item">
+        <span class="num">IV</span>
+        <h4>Aritmética</h4>
+        <p>O estudo das operações numéricas: adição, subtração, multiplicação e divisão.</p>
+      </div>
+      <div class="quad-item">
+        <span class="num">V</span>
+        <h4>Geometria</h4>
+        <p>A ciência da medição, dos tamanhos e das formas — a representação vívida das figuras.</p>
+      </div>
+      <div class="quad-item">
+        <span class="num">VI</span>
+        <h4>Música</h4>
+        <p>A ciência que relaciona os números à expressão dos sons.</p>
+      </div>
+      <div class="quad-item">
+        <span class="num">VII</span>
+        <h4>Astronomia</h4>
+        <p>A ciência do espaço e dos astros.</p>
       </div>
     </div>
   </div>
