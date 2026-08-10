@@ -326,6 +326,14 @@
   .field:focus { border-color: var(--gold); }
   .dark .field, .dark select.field { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.2); color: var(--white); }
   .dark .field::placeholder { color: rgba(255,255,255,0.4); }
+  /* Os campos ficam dentro de cards brancos (form-card/capture-card) mesmo quando a seção
+     ao redor é escura — sempre devem usar o estilo claro, nunca herdar o estilo dark. */
+  .form-card .field, .form-card select.field,
+  .capture-card .field, .capture-card select.field {
+    background: var(--white); border-color: rgba(15,26,42,0.18); color: var(--navy);
+  }
+  .form-card .field::placeholder, .capture-card .field::placeholder { color: rgba(15,26,42,0.38); }
+  .form-card .field:focus, .capture-card .field:focus { border-color: var(--gold); }
   select.field {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23C78C22' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat; background-position: right 18px center;
