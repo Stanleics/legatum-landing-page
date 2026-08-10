@@ -269,6 +269,7 @@
   /* ============ Ceremonial cards ============ */
   .cards-grid { display: grid; gap: 28px; }
   .cards-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .cards-4 { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
   .cards-2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
   .cards-flex { display: flex; flex-wrap: wrap; justify-content: center; gap: 28px; }
   .cards-flex .card-ceremonial { flex: 1 1 300px; max-width: 340px; }
@@ -306,16 +307,6 @@
 
   /* ============ Quadrivium (companheiro do Trivium) ============ */
   .quad-intro { max-width: 720px; margin: 0 auto; text-align: center; }
-  .quad-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 36px;
-    max-width: 980px; margin: 40px auto 0;
-  }
-  .quad-item { text-align: center; }
-  .quad-item .num {
-    font-family: var(--font-display); font-size: 13px; color: var(--gold); letter-spacing: 0.16em; display: block; margin-bottom: 12px;
-  }
-  .quad-item h4 { font-family: var(--font-display); font-size: 19px; letter-spacing: 0.02em; margin-bottom: 8px; color: var(--navy); }
-  .quad-item p { font-size: 14.5px; color: var(--ink-muted); margin: 0; line-height: 1.6; }
 
   /* ============ Virtue list ============ */
   .virtue-list { display: flex; flex-direction: column; }
@@ -717,25 +708,25 @@
       <p style="color:var(--ink-muted)">O Trivium prepara a mente para conhecer, pensar e comunicar. O Quadrivium — as outras quatro artes liberais clássicas — direciona esse mesmo rigor para o mundo material: os números, as formas, os sons e os astros. Juntas, elas formam as sete artes liberais que sustentam a Educação Clássica.</p>
     </div>
 
-    <div class="quad-grid reveal">
-      <div class="quad-item">
-        <span class="num">IV</span>
-        <h4>Aritmética</h4>
+    <div class="cards-grid cards-4 reveal" style="margin-top:40px">
+      <div class="card-ceremonial">
+        <div class="seal">IV</div>
+        <h3>Aritmética</h3>
         <p>O estudo das operações numéricas: adição, subtração, multiplicação e divisão.</p>
       </div>
-      <div class="quad-item">
-        <span class="num">V</span>
-        <h4>Geometria</h4>
+      <div class="card-ceremonial">
+        <div class="seal">V</div>
+        <h3>Geometria</h3>
         <p>A ciência da medição, dos tamanhos e das formas — a representação vívida das figuras.</p>
       </div>
-      <div class="quad-item">
-        <span class="num">VI</span>
-        <h4>Música</h4>
+      <div class="card-ceremonial">
+        <div class="seal">VI</div>
+        <h3>Música</h3>
         <p>A ciência que relaciona os números à expressão dos sons.</p>
       </div>
-      <div class="quad-item">
-        <span class="num">VII</span>
-        <h4>Astronomia</h4>
+      <div class="card-ceremonial">
+        <div class="seal">VII</div>
+        <h3>Astronomia</h3>
         <p>A ciência do espaço e dos astros.</p>
       </div>
     </div>
