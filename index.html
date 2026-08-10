@@ -499,34 +499,11 @@
     .split-media::before { inset: 14px -14px -14px 14px; }
   }
 
-  /* ============ Virtudes — cenário imersivo ============ */
-  /* A seção inteira usa a textura de tecido navy como fundo; a arte das colunas
-     vira o "palco" do bloco: ancorada na borda inferior, na largura do container,
-     com o título embutido da arte cortado (altura < proporção) e as bordas
-     fundidas no tecido via máscara de gradiente. */
-  #virtudes {
-    background: url('assets/tecido-navy.jpg') center top / cover no-repeat;
-    padding-bottom: 0;
-  }
-  .virtudes-banner {
-    position: relative;
-    margin: 44px 0 0;
-    height: 520px;
-    background: url('assets/virtudes-pilares.jpg') center bottom / 100% auto no-repeat;
-    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 16%), linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
-    -webkit-mask-composite: source-in;
-    mask-image: linear-gradient(180deg, transparent 0%, #000 16%), linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
-    mask-composite: intersect;
-  }
-  @media (max-width: 720px) {
-    .virtudes-banner {
-      height: 320px;
-      /* 125% da altura do bloco: mantém o corte do título embutido e
-         evita colunas minúsculas — mostra as colunas centrais */
-      background-size: auto 125%;
-      -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 14%), linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
-      mask-image: linear-gradient(180deg, transparent 0%, #000 14%), linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
-    }
+  /* ============ Virtudes — banner ilustrado ============ */
+  .virtudes-banner { position: relative; margin: 40px 0 8px; }
+  .virtudes-banner img {
+    width: 100%; height: auto; display: block; border-radius: var(--r-lg);
+    box-shadow: var(--shadow-elevated); border: 1px solid var(--gold-line);
   }
 </style>
 </head>
@@ -738,12 +715,13 @@
 <!-- ================= 07 VIRTUDES ================= -->
 <section class="dark flat section-pad" id="virtudes">
   <div class="container">
-    <div class="eyebrow center mx-auto reveal" style="justify-content:center">Formação de Caráter</div>
-    <h2 class="spec-title center-text mx-auto reveal" style="color:var(--white);max-width:760px">Virtudes que permanecem por toda a vida.</h2>
-    <p class="spec-desc center-text mx-auto reveal" style="margin-left:auto;margin-right:auto">Nossas virtudes não existem apenas em um documento institucional. Elas aparecem na forma como aprendemos, convivemos e cumprimos responsabilidades, todos os dias.</p>
-    <p class="center-text mx-auto reveal" style="margin:24px auto 0;font-style:italic;font-size:19px;color:var(--white-muted);max-width:720px">Não queremos que nossos alunos apenas conheçam essas virtudes. Queremos que aprendam a vivê-las.</p>
+    <div class="eyebrow reveal">Formação de Caráter</div>
+    <h2 class="spec-title measure reveal" style="color:var(--white)">Virtudes que permanecem por toda a vida.</h2>
+    <p class="spec-desc measure reveal">Nossas virtudes não existem apenas em um documento institucional. Elas aparecem na forma como aprendemos, convivemos e cumprimos responsabilidades, todos os dias.</p>
 
-    <div class="virtudes-banner reveal" role="img" aria-label="Cinco colunas clássicas representando as virtudes Legatum: Nobreza, Sabedoria, Coragem, Força e Liderança."></div>
+    <div class="virtudes-banner reveal">
+      <img src="assets/virtudes-pilares.jpg" alt="Cinco colunas clássicas representando as virtudes Legatum: Nobreza — escolhemos o que é bom, belo e verdadeiro; Sabedoria — compreendemos a realidade para agir com excelência; Coragem — defendemos a verdade com firmeza e mansidão; Força — persistimos com disciplina em todo dever; Liderança — servimos com humildade, sabedoria e propósito.">
+    </div>
     <ul class="sr-only">
       <li>Nobreza — Escolhemos o que é bom, belo e verdadeiro.</li>
       <li>Sabedoria — Compreendemos a realidade para agir com excelência.</li>
@@ -751,6 +729,7 @@
       <li>Força — Persistimos com disciplina em todo dever.</li>
       <li>Liderança — Servimos com humildade, sabedoria e propósito.</li>
     </ul>
+    <p class="measure reveal" style="margin-top:36px;font-style:italic;font-size:19px;color:var(--white-muted)">Não queremos que nossos alunos apenas conheçam essas virtudes. Queremos que aprendam a vivê-las.</p>
   </div>
 </section>
 
