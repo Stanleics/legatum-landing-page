@@ -137,10 +137,11 @@
     box-shadow: 0 4px 30px rgba(0,0,0,0.25);
   }
   .nav .container { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-  .nav-logo { display: flex; align-items: center; gap: 13px; text-decoration: none; }
-  .nav-logo img { height: 40px; width: auto; }
-  .nav-logo .nav-wordmark { font-family: var(--font-display); font-size: 17px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); line-height: 1.25; }
-  .nav-logo .nav-wordmark small { display: block; font-size: 9.5px; letter-spacing: 0.16em; color: var(--white-muted); }
+  .nav-logo { display: flex; align-items: center; gap: 16px; text-decoration: none; }
+  .nav-logo img { height: 62px; width: auto; transition: height .35s ease; }
+  .nav.scrolled .nav-logo img { height: 46px; }
+  .nav-logo .nav-wordmark { font-family: var(--font-display); font-size: 22px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); line-height: 1.3; }
+  .nav-logo .nav-wordmark small { display: block; font-size: 11px; letter-spacing: 0.22em; color: var(--gold-400); }
   .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; margin: 0; padding: 0; }
   .nav-links a {
     font-family: var(--font-display);
@@ -211,24 +212,35 @@
       linear-gradient(180deg, rgba(11,19,32,0.58) 0%, rgba(11,19,32,0.8) 100%),
       url('assets/tecido-navy.jpg') center/cover no-repeat;
   }
+  /* Foto à direita fundida no navy (estilo cinematográfico do mock) */
   .hero::before {
     content: '';
-    position: absolute; right: -120px; top: 50%; transform: translateY(-50%);
-    width: 620px; height: 620px;
-    background: url('assets/crest.png') center/contain no-repeat;
-    opacity: 0.22;
-    -webkit-mask-image: radial-gradient(closest-side, #000 45%, transparent 98%);
-    mask-image: radial-gradient(closest-side, #000 45%, transparent 98%);
-    pointer-events: none;
+    position: absolute; right: 0; top: 0; bottom: 0; width: 56%;
+    background: url('assets/infantil-desenhando.jpg') center / cover no-repeat;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 38%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 38%);
+    pointer-events: none; z-index: 0;
   }
-  .hero .container { position: relative; }
+  .hero::after {
+    content: '';
+    position: absolute; right: 0; top: 0; bottom: 0; width: 56%;
+    background:
+      linear-gradient(0deg, rgba(11,19,32,0.85) 0%, rgba(11,19,32,0.15) 34%, rgba(11,19,32,0) 55%),
+      linear-gradient(180deg, rgba(11,19,32,0.6) 0%, rgba(11,19,32,0) 30%),
+      linear-gradient(90deg, rgba(11,19,32,0.9) 0%, rgba(11,19,32,0.45) 45%, rgba(11,19,32,0.28) 100%);
+    pointer-events: none; z-index: 0;
+  }
+  @media (max-width: 900px) {
+    .hero::before, .hero::after { display: none; }
+  }
+  .hero .container { position: relative; z-index: 1; }
   .hero-topline { display: flex; align-items: center; gap: 20px; margin-bottom: 48px; }
   .hero-topline .line { flex: 1; max-width: 220px; height: 1px; background: linear-gradient(90deg, var(--gold-line), transparent); }
   .hero-topline .brand {
     font-family: var(--font-display); font-size: 13px; letter-spacing: 0.36em; text-transform: uppercase; color: var(--gold-400);
   }
   .hero h1 {
-    font-size: clamp(44px, 7vw, 84px); line-height: 1.06; letter-spacing: 0.005em; max-width: 880px;
+    font-size: clamp(44px, 6vw, 76px); line-height: 1.06; letter-spacing: 0.005em; max-width: 720px;
   }
   .hero-subtitle {
     font-family: var(--font-body); font-style: italic; font-weight: 700; font-size: clamp(19px, 2.2vw, 24px);
@@ -479,6 +491,12 @@
     .nav-logo img { height: 32px; }
     .nav-logo .nav-wordmark { font-size: 13px; }
     .nav-logo .nav-wordmark small { display: none; }
+  }
+
+  /* Em telas estreitas o CTA não cabe ao lado do logo + hambúrguer;
+     o menu hambúrguer já contém o mesmo botão. */
+  @media (max-width: 560px) {
+    .nav-right .btn-primary { display: none; }
   }
 
   /* ============ Visually hidden (accessible, off-screen) ============ */
