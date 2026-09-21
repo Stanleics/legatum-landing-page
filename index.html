@@ -348,7 +348,7 @@
 
   /* ============ Forms ============ */
   .field-group { display: flex; flex-direction: column; gap: 6px; }
-  label.field-label {
+  .field-label {
     font-family: var(--font-display); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
   }
   .field, select.field {
@@ -377,6 +377,10 @@
   .form-grid .span-2 { grid-column: 1 / -1; }
   @media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } }
 
+  .form-error { display: none; margin-top: 16px; padding: 12px 16px; border-radius: var(--r-md); background: #FBEDEA; color: #8A2A1B; font-size: 15px; }
+  .form-error.show { display: block; }
+  /* Campo-isca anti-spam: invisível para pessoas, robôs preenchem */
+  .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
   .disclaimer { font-size: 13px; color: var(--ink-muted); line-height: 1.6; margin-top: 18px; }
   .dark .disclaimer { color: var(--white-muted); }
   .form-card .disclaimer { color: var(--ink-muted); } /* card branco dentro de seção escura */
@@ -404,7 +408,15 @@
   }
   .capture-card::before { content:''; position:absolute; inset:7px; border:1px solid rgba(199,140,34,0.15); border-radius: calc(var(--r-xl) - 4px); pointer-events:none; }
   .capture-grid { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 16px; align-items: end; margin-top: 24px; }
-  @media (max-width: 900px) { .capture-grid { grid-template-columns: 1fr; } }
+  .capture-grid .capture-consent { grid-column: 1 / -1; }
+  .capture-grid .checkbox-row { font-size: 14px; color: var(--ink-muted); }
+  .capture-grid .form-error { margin-top: 0; }
+  @media (max-width: 900px) {
+    .capture-grid { grid-template-columns: 1fr; }
+    /* Em coluna única o consentimento sobe para antes do botão */
+    .capture-grid > .btn { order: 1; }
+    .capture-grid > .form-error { order: 2; }
+  }
   @media (max-width: 640px) { .capture-card { padding: 32px 24px; } }
 
   /* ============ FAQ accordion ============ */
@@ -609,20 +621,29 @@
       <div id="captureForm">
         <h3 class="center-text" style="max-width:560px">Registre seu interesse agora.</h3>
         <p class="center-text muted" style="max-width:560px">Preencha os dados abaixo e nossa equipe entra em contato para apresentar os próximos passos da primeira geração Legatum.</p>
-        <form class="capture-grid" id="formCaptura">
+        <form class="capture-grid" id="formCaptura" data-form="lista" novalidate>
           <div class="field-group">
             <label class="field-label" for="cap-nome">Responsável</label>
-            <input class="field" id="cap-nome" type="text" placeholder="Nome do responsável" required>
+            <input class="field" id="cap-nome" name="nome" type="text" autocomplete="name" placeholder="Nome do responsável" required>
           </div>
           <div class="field-group">
             <label class="field-label" for="cap-whats">WhatsApp</label>
-            <input class="field" id="cap-whats" type="tel" placeholder="(00) 00000-0000" required>
+            <input class="field" id="cap-whats" name="whatsapp" type="tel" autocomplete="tel" placeholder="(00) 00000-0000" required>
           </div>
           <div class="field-group">
             <label class="field-label" for="cap-email">E-mail</label>
-            <input class="field" id="cap-email" type="email" placeholder="seu@email.com" required>
+            <input class="field" id="cap-email" name="email" type="email" autocomplete="email" placeholder="seu@email.com" required>
           </div>
           <button class="btn btn-primary" type="submit">Quero ser avisado</button>
+          <div class="checkbox-row capture-consent">
+            <input type="checkbox" id="cap-lgpd" name="lgpd" required>
+            <label for="cap-lgpd">Autorizo a Legatum a usar meus dados para contato sobre as admissões, conforme a LGPD.</label>
+          </div>
+          <div class="hp-field" aria-hidden="true">
+            <label for="cap-site">Não preencha</label>
+            <input id="cap-site" name="site" type="text" tabindex="-1" autocomplete="off">
+          </div>
+          <p class="form-error capture-consent" role="alert"></p>
         </form>
         <p class="disclaimer center-text">*Vagas limitadas e sujeitas a processo de admissão. O registro não garante matrícula.</p>
       </div>
@@ -1001,31 +1022,31 @@
       <div id="admissionsForm">
         <h3>Quero conhecer a Legatum</h3>
         <p class="form-desc">Preencha os dados abaixo — nossa equipe entrará em contato com sua família.</p>
-        <form id="formAdmissoes">
+        <form id="formAdmissoes" data-form="admissoes" novalidate>
           <div class="form-grid">
             <div class="field-group">
               <label class="field-label" for="ad-nome">Nome do responsável</label>
-              <input class="field" id="ad-nome" type="text" required>
+              <input class="field" id="ad-nome" name="nome" type="text" required>
             </div>
             <div class="field-group">
               <label class="field-label" for="ad-tel">Telefone / WhatsApp</label>
-              <input class="field" id="ad-tel" type="tel" required>
+              <input class="field" id="ad-tel" name="telefone" type="tel" required>
             </div>
             <div class="field-group">
               <label class="field-label" for="ad-email">E-mail</label>
-              <input class="field" id="ad-email" type="email" required>
+              <input class="field" id="ad-email" name="email" type="email" required>
             </div>
             <div class="field-group">
               <label class="field-label" for="ad-crianca">Nome da criança</label>
-              <input class="field" id="ad-crianca" type="text" required>
+              <input class="field" id="ad-crianca" name="crianca" type="text" required>
             </div>
             <div class="field-group">
               <label class="field-label" for="ad-nasc">Data de nascimento</label>
-              <input class="field" id="ad-nasc" type="date" required>
+              <input class="field" id="ad-nasc" name="nascimento" type="date" required>
             </div>
             <div class="field-group">
               <label class="field-label" for="ad-ano">Ano escolar pretendido — 2027</label>
-              <select class="field" id="ad-ano" required>
+              <select class="field" id="ad-ano" name="ano" required>
                 <option value="" selected disabled>Selecione</option>
                 <option>Infantil 4</option>
                 <option>Infantil 5</option>
@@ -1038,7 +1059,7 @@
             </div>
             <div class="field-group span-2">
               <label class="field-label" for="ad-como">Como conheceu a Legatum?</label>
-              <select class="field" id="ad-como" required>
+              <select class="field" id="ad-como" name="como" required>
                 <option value="" selected disabled>Selecione</option>
                 <option>Instagram</option>
                 <option>Indicação de amigos ou família</option>
@@ -1048,11 +1069,20 @@
               </select>
             </div>
             <div class="span-2 checkbox-row">
-              <input type="checkbox" id="ad-fundadoras">
+              <input type="checkbox" id="ad-fundadoras" name="fundadoras">
               <label for="ad-fundadoras">Tenho interesse em conhecer o Programa Famílias Fundadoras</label>
             </div>
+            <div class="span-2 checkbox-row">
+              <input type="checkbox" id="ad-lgpd" name="lgpd" required>
+              <label for="ad-lgpd">Autorizo a Legatum a usar os dados informados, inclusive os da criança, exclusivamente para o processo de admissão, conforme a LGPD.</label>
+            </div>
+            <div class="hp-field" aria-hidden="true">
+            <label for="ad-site">Não preencha</label>
+            <input id="ad-site" name="site" type="text" tabindex="-1" autocomplete="off">
+          </div>
           </div>
           <button class="btn btn-primary btn-block" type="submit" style="margin-top:28px">Enviar meu interesse</button>
+          <p class="form-error" role="alert"></p>
         </form>
         <p class="disclaimer">*Vagas limitadas para a primeira geração 2027. O registro de interesse não representa confirmação de matrícula. Nossa equipe entrará em contato com sua família para apresentar as próximas etapas do processo de admissão.</p>
       </div>
@@ -1137,15 +1167,56 @@
   }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
   revealEls.forEach(el => io.observe(el));
 
-  // Form handlers (front-end only demo)
+  // Formulários → Google Apps Script na conta do cliente (código em backend/, fora
+  // do repo). Grava na planilha de Admissões.
+  const FORMS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwPkFrhzFtD3mzOaD0pMHYBroZoxYVevk22sBm7rjiD-EWw2LAS6BOy_ev334G2w_fz/exec';
+  const CV_MAX_BYTES = 5 * 1024 * 1024;
+
+  function readAsBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(',')[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
   function wireForm(formId, wrapId, thanksId) {
     const form = document.getElementById(formId);
-    if (!form) return;
-    form.addEventListener('submit', (e) => {
+    const submit = form.querySelector('[type="submit"]');
+    const label = submit.textContent;
+    const error = form.querySelector('.form-error');
+    const showError = (msg) => { error.textContent = msg; error.classList.add('show'); };
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      document.getElementById(wrapId).style.display = 'none';
-      const thanks = document.getElementById(thanksId);
-      thanks.classList.add('show');
+      error.classList.remove('show');
+      if (!form.reportValidity()) return;
+
+      const data = Object.fromEntries(new FormData(form));
+      data.form = form.dataset.form;
+      const cv = form.querySelector('input[type="file"]');
+      if (cv) {
+        const file = cv.files[0];
+        if (file.size > CV_MAX_BYTES) return showError('O currículo precisa ter até 5 MB.');
+        data[cv.name] = { nome: file.name, tipo: file.type, base64: await readAsBase64(file) };
+      }
+
+      submit.disabled = true;
+      submit.textContent = 'Enviando…';
+      try {
+        // text/plain evita o preflight CORS, que o Apps Script não responde
+        const res = await fetch(FORMS_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(data) });
+        const json = await res.json();
+        if (!json.ok) throw new Error(json.error || 'falha');
+        document.getElementById(wrapId).style.display = 'none';
+        document.getElementById(thanksId).classList.add('show');
+      } catch (err) {
+        showError('Não foi possível enviar agora. Tente novamente em instantes.');
+      } finally {
+        submit.disabled = false;
+        submit.textContent = label;
+      }
     });
   }
   wireForm('formCaptura', 'captureForm', 'captureThanks');
