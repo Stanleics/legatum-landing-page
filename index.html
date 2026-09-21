@@ -476,6 +476,31 @@
   .final-call .meta { font-family: var(--font-display); font-size: 12.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-400); margin-bottom: 40px; }
 
   /* ============ Footer ============ */
+  /* ============ Trabalhe conosco (faixa + modal do banco de talentos) ============ */
+  .talent-band { background: var(--navy-800); border-top: 1px solid var(--gold-line); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 44px 0; }
+  .talent-band .container { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 48px; }
+  .talent-band h2 { font-size: clamp(24px, 3vw, 32px); color: var(--white); margin-bottom: 6px; }
+  .talent-band p { color: var(--white-muted); font-size: 16px; max-width: 560px; }
+
+  .talent-dialog { border: none; padding: 0; background: transparent; width: min(720px, calc(100% - 32px)); max-height: calc(100dvh - 32px); overflow: auto; }
+  .talent-dialog::backdrop { background: rgba(15,26,42,0.78); backdrop-filter: blur(3px); }
+  .talent-dialog .form-card { margin: 0; max-width: none; }
+  .talent-dialog h3 { padding-right: 44px; }
+  .dialog-close {
+    position: absolute; top: 18px; right: 18px; z-index: 1; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--gold-line);
+    background: var(--white); color: var(--navy); font-size: 22px; line-height: 1; cursor: pointer;
+  }
+  .dialog-close:hover { background: var(--ivory); }
+  .file-drop {
+    display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 22px 18px; text-align: center; cursor: pointer;
+    border: 1px dashed rgba(15,26,42,0.3); border-radius: var(--r-md); color: var(--ink-muted); font-size: 15px; transition: border-color .2s, background .2s;
+  }
+  .file-drop:hover, .file-drop:focus-within { border-color: var(--gold); background: rgba(199,140,34,0.05); }
+  .file-drop strong { color: var(--navy); font-weight: 400; }
+  .file-drop small { font-size: 13px; }
+  textarea.field { resize: vertical; }
+  .file-drop input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+
   footer.site-footer { background: var(--navy); color: var(--white-muted); padding: 80px 0 32px; }
   .footer-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 48px; padding-bottom: 56px; border-bottom: 1px solid rgba(255,255,255,0.1); }
   .footer-brand img { height: 52px; width: auto; max-width: 100%; object-fit: contain; object-position: left; margin-bottom: 22px; }
@@ -1110,6 +1135,87 @@
   </div>
 </section>
 
+<!-- ================= TRABALHE CONOSCO ================= -->
+<section class="talent-band" id="trabalhe-conosco">
+  <div class="container">
+    <div>
+      <h2>Trabalhe conosco</h2>
+      <p>Professores e profissionais que desejam fazer parte da primeira geração da Legatum.</p>
+    </div>
+    <button class="btn btn-outline" type="button" id="openTalentBtn">Banco de Talentos</button>
+  </div>
+</section>
+
+<dialog class="talent-dialog" id="talentDialog" aria-labelledby="talentTitle">
+  <div class="form-card">
+    <button class="dialog-close" type="button" id="closeTalentBtn" aria-label="Fechar">×</button>
+    <div id="talentForm">
+      <h3 id="talentTitle">Faça parte da Legatum</h3>
+      <p class="form-desc">Preencha os dados abaixo para registrar seu interesse em integrar a equipe da Legatum International School.</p>
+      <form id="formTalentos" data-form="talentos" novalidate>
+        <div class="form-grid">
+          <div class="field-group span-2">
+            <label class="field-label" for="tl-nome">Nome completo</label>
+            <input class="field" id="tl-nome" name="nome" type="text" autocomplete="name" autofocus required>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="tl-email">E-mail</label>
+            <input class="field" id="tl-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="tl-tel">Telefone / WhatsApp</label>
+            <input class="field" id="tl-tel" name="telefone" type="tel" autocomplete="tel" required>
+          </div>
+          <div class="field-group span-2">
+            <label class="field-label" for="tl-area">Área de interesse</label>
+            <select class="field" id="tl-area" name="area" required>
+              <option value="" selected disabled>Selecione</option>
+              <option>Docência · Educação Infantil</option>
+              <option>Docência · Anos Iniciais (1º ao 5º)</option>
+              <option>Docência · Línguas (inglês, latim)</option>
+              <option>Docência · Artes, música ou educação física</option>
+              <option>Coordenação pedagógica</option>
+              <option>Administrativo e secretaria</option>
+              <option>Outra</option>
+            </select>
+          </div>
+          <div class="field-group span-2">
+            <span class="field-label" id="tl-cv-label">Currículo</span>
+            <label class="file-drop" for="tl-cv">
+              <strong id="tl-cv-name">Clique para escolher o arquivo</strong>
+              <small>PDF ou Word · até 5 MB</small>
+              <input id="tl-cv" name="curriculo" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" aria-labelledby="tl-cv-label" required>
+            </label>
+          </div>
+          <div class="field-group span-2">
+            <label class="field-label" for="tl-linkedin">LinkedIn (opcional)</label>
+            <input class="field" id="tl-linkedin" name="linkedin" type="url" placeholder="https://linkedin.com/in/...">
+          </div>
+          <div class="field-group span-2">
+            <label class="field-label" for="tl-msg">Conte um pouco sobre você (opcional)</label>
+            <textarea class="field" id="tl-msg" name="mensagem" rows="3"></textarea>
+          </div>
+          <div class="hp-field" aria-hidden="true">
+            <label for="tl-site">Não preencha</label>
+            <input id="tl-site" name="site" type="text" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="span-2 checkbox-row">
+            <input type="checkbox" id="tl-lgpd" name="lgpd" required>
+            <label for="tl-lgpd">Autorizo a Legatum International School a armazenar meus dados e currículo para processos seletivos, conforme a LGPD.</label>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit" style="margin-top:28px">Enviar candidatura</button>
+        <p class="form-error" role="alert"></p>
+      </form>
+    </div>
+    <div class="thankyou" id="talentThanks">
+      <div class="seal">✓</div>
+      <h3>Candidatura recebida.</h3>
+      <p>Obrigado pelo interesse em fazer parte da Legatum. Seu currículo está em nosso banco de talentos e entraremos em contato quando houver uma oportunidade compatível.</p>
+    </div>
+  </div>
+</dialog>
+
 <!-- ================= 17 RODAPÉ ================= -->
 <footer class="site-footer">
   <div class="container">
@@ -1126,6 +1232,7 @@
         <li><a href="#fundadoras">Famílias Fundadoras</a></li>
         <li><a href="#admissoes">Admissões</a></li>
         <li><a href="#admissoes">Contato</a></li>
+        <li><a href="#trabalhe-conosco">Trabalhe conosco</a></li>
       </ul>
     </div>
     <div class="footer-bottom">
@@ -1168,7 +1275,7 @@
   revealEls.forEach(el => io.observe(el));
 
   // Formulários → Google Apps Script na conta do cliente (código em backend/, fora
-  // do repo). Grava na planilha de Admissões.
+  // do repo). Grava nas planilhas de Admissões e RH e salva currículos no Drive.
   const FORMS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwPkFrhzFtD3mzOaD0pMHYBroZoxYVevk22sBm7rjiD-EWw2LAS6BOy_ev334G2w_fz/exec';
   const CV_MAX_BYTES = 5 * 1024 * 1024;
 
@@ -1221,6 +1328,18 @@
   }
   wireForm('formCaptura', 'captureForm', 'captureThanks');
   wireForm('formAdmissoes', 'admissionsForm', 'admissionsThanks');
+  wireForm('formTalentos', 'talentForm', 'talentThanks');
+
+  // Banco de talentos: modal
+  const talentDialog = document.getElementById('talentDialog');
+  const cvInput = document.getElementById('tl-cv');
+  document.getElementById('openTalentBtn').addEventListener('click', () => talentDialog.showModal());
+  document.getElementById('closeTalentBtn').addEventListener('click', () => talentDialog.close());
+  talentDialog.addEventListener('click', (e) => { if (e.target === talentDialog) talentDialog.close(); });
+  cvInput.addEventListener('change', () => {
+    const file = cvInput.files[0];
+    document.getElementById('tl-cv-name').textContent = file ? file.name : 'Clique para escolher o arquivo';
+  });
 </script>
 
 </body>
