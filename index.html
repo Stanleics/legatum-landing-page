@@ -81,6 +81,9 @@
   .eyebrow.center::after { content: ''; width: 40px; height: 1px; background: var(--gold); }
 
   .gold-word { position: relative; white-space: nowrap; }
+  /* No celular a frase grifada pode ser mais larga que a tela: quebra dentro de um
+     bloco inline, e o grifo fica sob a última linha */
+  @media (max-width: 640px) { .gold-word { white-space: normal; display: inline-block; } }
   .gold-word::after {
     content: '';
     position: absolute; left: 0; right: 0; bottom: 0.04em;
@@ -195,6 +198,8 @@
   .btn-ghost::after { content: '→'; font-family: var(--font-body); }
   .btn-block { width: 100%; }
   .btn[disabled] { opacity: .6; cursor: default; }
+  /* No celular o rótulo quebra em vez de vazar a tela (ex.: CTAs longos do hero) */
+  @media (max-width: 640px) { .btn { white-space: normal; max-width: 100%; text-align: center; padding: 16px 22px; font-size: 13px; letter-spacing: 0.08em; } }
 
   .cta-row { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; }
 
