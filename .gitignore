@@ -10,3 +10,6 @@ imagens/
 
 # Notas internas de trabalho (o repo é público e serve de link ao cliente)
 CLAUDE.md
+
+# Código do Google Apps Script (roda na conta do cliente, não no site)
+backend/
